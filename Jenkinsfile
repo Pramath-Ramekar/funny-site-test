@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        GIT_CREDS = 'github-push-token'
+        REPO_URL = 'github.com/Pramath-Ramekar/funny-site-test.git'
         MAIN_BRANCH = 'main'
     }
 
@@ -16,6 +16,7 @@ pipeline {
         stage('Sanity Check') {
             steps {
                 sh '''
+                  echo "Running sanity checks"
                   test -f index.html
                   test -f style.css
                   echo "Sanity check passed"
@@ -23,10 +24,10 @@ pipeline {
             }
         }
 
-        stage('Promote to Main') {
+        stage('Auto Push to Main') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: env.GIT_CREDS,
+                    credentialsId: 'github-push-token',
                     usernameVariable: 'GIT_USER',
                     passwordVariable: 'GIT_TOKEN'
                 )]) {
@@ -34,12 +35,13 @@ pipeline {
                       git config user.name "jenkins-bot"
                       git config user.email "jenkins@ci.local"
 
+                      git fetch origin
                       git checkout main || git checkout -b main
-                      git pull https://$GIT_USER:$GIT_TOKEN@github.com/Pramath-Ramekar/funny-site-test.git main
+                      git pull https://$GIT_USER:$GIT_TOKEN@$REPO_URL main
 
                       git merge origin/test/funny-site --no-edit
 
-                      git push https://$GIT_USER:$GIT_TOKEN@github.com/Pramath-Ramekar/funny-site-test.git main
+                      git push https://$GIT_USER:$GIT_TOKEN@$REPO_URL main
                     '''
                 }
             }
@@ -48,10 +50,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ Auto-merged to main successfully"
+            echo "✅ Jenkins successfully promoted code to main"
         }
         failure {
-            echo "❌ Build failed — main NOT touched"
+            echo "❌ Jenkins failed — main untouched"
         }
     }
 }

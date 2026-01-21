@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Funny CI/CD Test Site</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">DevOps demo · Zero backend · 100% laughs</p>
+        <h1>Funny CI/CD Test Site</h1>
+        <p class="lede">A tiny static page to prove the pipeline is alive, healthy, and not secretly deploying on Fridays.</p>
+        <div class="cta-row">
+          <button id="build-btn" type="button">Trigger Build</button>
+          <span class="hint">(It just pops an alert, promise.)</span>
+        </div>
+      </div>
+      <div class="badge-wall">
+        <div class="badge">CI ✅</div>
+        <div class="badge">CD 🚀</div>
+        <div class="badge">Lint ☑️</div>
+        <div class="badge">Tests 🧪</div>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>Jenkins Joke of the Day</h2>
+      <p>Why did Jenkins refuse to attend standup? It was already triggered by too many builds and needed a cooldown period.</p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h3>What this proves</h3>
+        <ul>
+          <li>Static assets ship instantly.</li>
+          <li>No backend required.</li>
+          <li>Great for smoke tests and uptime checks.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>How to demo</h3>
+        <ol>
+          <li>Build in CI.</li>
+          <li>Ship to any static host.</li>
+          <li>Click the button to see the alert.</li>
+        </ol>
+      </article>
+      <article class="card">
+        <h3>Why it is safe</h3>
+        <ul>
+          <li>No secrets, tokens, or databases.</li>
+          <li>Minimal dependencies (just HTML/CSS/JS).</li>
+          <li>Small footprint for fast caching.</li>
+        </ul>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <p>Made for pipeline sanity checks. If this page loads, your deploy worked.</p>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('build-btn').addEventListener('click', function () {
+      alert('Build triggered! (Actually just a friendly JS alert for the demo.)');
+    });
+  </script>
+</body>
+</html>
